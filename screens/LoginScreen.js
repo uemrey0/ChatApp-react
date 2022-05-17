@@ -20,7 +20,7 @@ const LoginScreen = ({navigation}) => {
             <Input placeholder='Password' secureTextEntry type="password" value={password} onChangeText={(text)=>setPassword(text)} />
         </View>
         <Button containerStyle={styles.button} onPress={signIn()} title="Login" /> 
-        <Button containerStyle={styles.button} type="outline" title="Register" /> 
+        <Button  onPress={() => {navigation.navigate("Register")}} containerStyle={styles.button} type="outline" title="Register" /> 
         <View style={{height:100}} />
     </KeyboardAvoidingView>
   )
