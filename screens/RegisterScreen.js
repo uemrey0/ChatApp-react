@@ -2,6 +2,7 @@
  import React, { useLayoutEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { Button, Input, Text} from 'react-native-elements'
+import { auth } from '../firebase';
  
  const RegisterScreen = ({navigation}) => {
    const [name, setName] = useState("");
@@ -16,7 +17,12 @@ import { Button, Input, Text} from 'react-native-elements'
    }, [navigation])
 
    const register = () => {
-
+       auth.createUserWithEmailAndPassword(email,password).then(authUser => {
+           authUser.user.update({
+            displayName: name,
+            photoURL: photoURL || "https://seeklogo.com/images/S/signal-logo-20A1616F60-seeklogo.com.png",
+           });
+       }).catch((error) => alert(error.message));
    };
    return (
      <KeyboardAvoidingView behavior='padding' style={styles.contaner}>
