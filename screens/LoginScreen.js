@@ -7,15 +7,17 @@ import { auth } from '../firebase'
 const LoginScreen = ({navigation}) => {
   const [email,setEmail] = useState("");
   const [password,setPassword ] = useState("");
-  const signIn = () => {
-    
-  };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser)=>{
-        if(authUser) navigation.replace("Home");
+        if(authUser) {
+            navigation.replace("Home");
+        }
     });
     return unsubscribe;
   }, []);
+  const signIn = () => {
+    auth.signInWithEmailAndPassword(email,password).catch((error) => alert(error.message));
+  };
   return (
     <KeyboardAvoidingView behavior='padding' enabled style={styles.container}>
         <StatusBar style='light' />
@@ -24,9 +26,9 @@ const LoginScreen = ({navigation}) => {
         }} style={{width: 150, height: 150}} />
         <View style={styles.inputContainer}>
             <Input placeholder='Email' autoFocus type="email" value={email} onChangeText={(text)=>setEmail(text)} />
-            <Input placeholder='Password' secureTextEntry type="password" value={password} onChangeText={(text)=>setPassword(text)} />
+            <Input placeholder='Password' secureTextEntry type="password" value={password} onChangeText={(text)=>setPassword(text)} onSubmitEditing={signIn} />
         </View>
-        <Button containerStyle={styles.button} onPress={signIn()} title="Login" /> 
+        <Button containerStyle={styles.button} onPress={signIn} title="Login" /> 
         <Button  onPress={() => {navigation.navigate("Register")}} containerStyle={styles.button} type="outline" title="Register" /> 
         <View style={{height:100}} />
     </KeyboardAvoidingView>
