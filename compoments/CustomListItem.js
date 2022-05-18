@@ -5,11 +5,11 @@ import { ListItemContent } from '@rneui/base/dist/ListItem/ListItem.Content'
 
 const CustomListItem = ({id,chatName,enterChat}) => {
   return (
-    <ListItem>
+    <ListItem onPress={() => enterChat(id,chatName)} key={id} bottomDivider>
         <Avatar rounded source={{uri: "https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png"}} />
         <ListItem.Content>
             <ListItem.Title style={{fontWeight: "800"}}>
-                Youtube Chat
+                {chatName}
             </ListItem.Title>
             <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
                 This is a Subtitle
