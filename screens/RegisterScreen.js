@@ -20,7 +20,7 @@ import { auth } from '../firebase';
        auth.createUserWithEmailAndPassword(email,password).then(authUser => {
            authUser.user.updateProfile({
             displayName: name,
-            photoURL: ımageUrl || "https://seeklogo.com/images/S/signal-logo-20A1616F60-seeklogo.com.png",
+            photoURL: ımageUrl || "https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png",
            });
        }).catch((error) => alert(error.message));
    };
