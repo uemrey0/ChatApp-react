@@ -18,9 +18,9 @@ import { auth } from '../firebase';
 
    const register = () => {
        auth.createUserWithEmailAndPassword(email,password).then(authUser => {
-           authUser.user.update({
+           authUser.user.updateProfile({
             displayName: name,
-            photoURL: photoURL || "https://seeklogo.com/images/S/signal-logo-20A1616F60-seeklogo.com.png",
+            photoURL: ımageUrl || "https://seeklogo.com/images/S/signal-logo-20A1616F60-seeklogo.com.png",
            });
        }).catch((error) => alert(error.message));
    };
