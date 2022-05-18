@@ -16,13 +16,14 @@ const ChatScreen = ({navigation, route}) => {
             headerTitleAlign: 'left',
             headerTitle: () => (
                 <View style={{flexDirection: "row", alignItems: "center",}}>
-                    <Avatar rounded source={{uri: messages[0]?.data.photoURL}} />
+                    
                     <Text style={{color: "white", marginLeft: 10, fontWeight: "700"}}>{route.params.chatName}</Text>
                 </View>
             ),
             headerLeft: () => (
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <AntDesign name='arrowleft' size={25} color="white" />
+                <TouchableOpacity style={{flexDirection: "row", alignItems: "center",}} onPress={() => navigation.goBack()}>
+                    <AntDesign style={{marginRight: 10}} name='arrowleft' size={25} color="white" />
+                    <Avatar rounded source={{uri: messages[0]?.data.photoURL}} />
                 </TouchableOpacity>
             ),
             headerRight: () => (
