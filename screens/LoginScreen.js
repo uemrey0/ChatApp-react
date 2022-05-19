@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { Button, Input, Image } from 'react-native-elements'
-import React, { useEffect, useState } from 'react'
+import { Button, Input, Image, Icon } from 'react-native-elements'
+import PhoneInput from 'react-native-phone-input'
+import React, { useEffect, useRef, useState } from 'react'
 import { auth } from '../firebase'
+import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from 'expo-firebase-recaptcha'
 
 const LoginScreen = ({navigation}) => {
   const [email,setEmail] = useState("");
   const [password,setPassword ] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("")
+  const phoneRef = useRef(undefined);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser)=>{
         if(authUser) {
@@ -16,7 +20,11 @@ const LoginScreen = ({navigation}) => {
     return unsubscribe;
   }, []);
   const signIn = () => {
-    auth.signInWithEmailAndPassword(email,password).catch((error) => alert(error.message));
+    if(phoneNumber && phoneNumber.length > 12){
+        navigation.navigate('OTP', {phoneNumber});
+        }
+        else
+        alert("Please enter 10 digit phone number");
   };
   return (
     <KeyboardAvoidingView behavior='padding' enabled style={styles.container}>
@@ -25,11 +33,15 @@ const LoginScreen = ({navigation}) => {
             uri: "https://seeklogo.com/images/S/signal-logo-20A1616F60-seeklogo.com.png",
         }} style={{width: 150, height: 150}} />
         <View style={styles.inputContainer}>
-            <Input placeholder='Email' autoFocus type="email" value={email} onChangeText={(text)=>setEmail(text)} />
-            <Input placeholder='Password' secureTextEntry type="password" value={password} onChangeText={(text)=>setPassword(text)} onSubmitEditing={signIn} />
+            <PhoneInput
+                style={styles.phoneInput} 
+                ref={phoneRef}
+                value={phoneNumber}
+                initialCountry={'tr'}
+                onChangePhoneNumber={setPhoneNumber} 
+            />
         </View>
-        <Button containerStyle={styles.button} onPress={signIn} title="Login" /> 
-        <Button  onPress={() => {navigation.navigate("Register")}} containerStyle={styles.button} type="outline" title="Register" /> 
+        <Button containerStyle={styles.button} onPress={signIn} title={<><Text style={{color: "white", fontWeight: "500"}}>Next</Text><Icon name="arrow-right" size={24} color="white" /></>} /> 
         <View style={{height:100}} />
     </KeyboardAvoidingView>
   )
@@ -52,5 +64,11 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
-    }
+    },
+    phoneInput: {
+        borderColor: '#ddd',
+        borderWidth: 2,
+        borderRadius: 2,
+        padding: 16
+      },
 })
