@@ -44,7 +44,7 @@ const OTPScreen = function ({ route: { params: { phoneNumber } }, navigation }) 
           recaptchaVerifier.current
         );
         setVerificationId(verificationId);
-        alert('Verification code has been sent to your phone.');
+        setErrorMessage('Verification code has been sent to your phone.');
      }catch(e){
       alert(e);
     }
@@ -61,7 +61,7 @@ const OTPScreen = function ({ route: { params: { phoneNumber } }, navigation }) 
             );
      const response = await signInWithCredential(auth, credential);
      if(response){
-       console.log("oldu")
+       navigation.replace("Register", {phoneNumber});
      }
      } catch(e){
        alert(e);
@@ -151,7 +151,7 @@ const OTPScreen = function ({ route: { params: { phoneNumber } }, navigation }) 
 
         {errorMessage ? (
           <CustomText
-            style={{color:"red",marginRight:20,textAlign:"center"}}>
+            style={{color:"red",marginRight:20,marginTop:20,textAlign:"center"}}>
             {errorMessage}
           </CustomText>
         ) : null}
