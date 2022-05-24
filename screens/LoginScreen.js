@@ -11,14 +11,7 @@ const LoginScreen = ({navigation}) => {
   const [password,setPassword ] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
   const phoneRef = useRef(undefined);
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser)=>{
-        if(authUser) {
-            navigation.replace("Home");
-        }
-    });
-    return unsubscribe;
-  }, []);
+  
   const signIn = () => {
     if(phoneNumber && phoneNumber.length > 12){
         navigation.navigate('OTP', {phoneNumber});

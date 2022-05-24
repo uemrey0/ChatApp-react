@@ -8,6 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import AddChatScreen from './screens/AddChatScreen';
 import ChatScreen from './screens/ChatScreen';
 import OTPScreen from './screens/OTPScreen';
+import LoadingScreen from './screens/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
 const globalScreenOptions = {
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={globalScreenOptions}>
+        <Stack.Screen name='Loading' component={LoadingScreen} />
         <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name='OTP' component={OTPScreen} />
         <Stack.Screen name='Register' component={RegisterScreen} />
