@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { Button, Input, Image, Icon } from 'react-native-elements'
 import PhoneInput from 'react-native-phone-input'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { auth } from '../firebase'
 import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from 'expo-firebase-recaptcha'
 
@@ -11,7 +11,11 @@ const LoginScreen = ({navigation}) => {
   const [password,setPassword ] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
   const phoneRef = useRef(undefined);
-  
+  useLayoutEffect(() => {
+    navigation.setOptions({
+        headerBackVisible: false,
+    }) 
+  }, [navigation])
   const signIn = () => {
     if(phoneNumber && phoneNumber.length > 12){
         navigation.navigate('OTP', {phoneNumber});

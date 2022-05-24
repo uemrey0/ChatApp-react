@@ -23,6 +23,14 @@ const HomeScreen = ({navigation}) => {
     ));
     return unsubscribe;
   }, []);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser)=>{
+        if(!authUser) {
+          navigation.replace("Loading");
+        }
+    });
+    return unsubscribe;
+  }, [])
   useLayoutEffect(() => {
     navigation.setOptions({
         title: "Signal",
@@ -30,7 +38,7 @@ const HomeScreen = ({navigation}) => {
         headerTitleStyle: {color: "black"},
         headerTintColor: "black",
         headerLeft: ()=> (<View style={{marginLeft: 20}}>
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity onPress={()=>{auth.signOut()}} activeOpacity={0.5}>
           <Avatar rounded source={{uri: auth?.currentUser?.photoURL }} />
           </TouchableOpacity>
         </View>
