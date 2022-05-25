@@ -43,7 +43,7 @@ const ChatScreen = ({navigation, route}) => {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             message: input,
             displayName: auth.currentUser.displayName,
-            email: auth.currentUser.email,
+            phoneNumber: auth.currentUser.phoneNumber,
             photoURL: auth.currentUser.photoURL,
         });
         setInput("");
@@ -72,7 +72,7 @@ const ChatScreen = ({navigation, route}) => {
                 <>
                     <ScrollView contentContainerStyle={{paddingTop: 15, paddingLeft: 15}}>
                         {messages.map(({id,data})=>(
-                            data.email === auth.currentUser.email ? (
+                            data.phoneNumber === auth.currentUser.phoneNumber ? (
                                 <View key={id} style={styles.reciever}>
                                     <Avatar 
                                     position="absolute"
