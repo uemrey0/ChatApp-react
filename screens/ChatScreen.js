@@ -69,9 +69,8 @@ const ChatScreen = ({navigation, route}) => {
             enabled
             keyboardVerticalOffset= {90}
             >
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
                 <>
-                    <ScrollView contentContainerStyle={{paddingTop: 15}}>
+                    <ScrollView contentContainerStyle={{paddingTop: 15, paddingLeft: 15}}>
                         {messages.map(({id,data})=>(
                             data.email === auth.currentUser.email ? (
                                 <View key={id} style={styles.reciever}>
@@ -123,7 +122,6 @@ const ChatScreen = ({navigation, route}) => {
                     </View>
                     
                 </>
-                </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
