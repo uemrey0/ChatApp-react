@@ -11,16 +11,15 @@ import uuid from "uuid";
  
  const RegisterScreen = ({ route: { params: { phoneNumber } }, navigation }) => {
    const [name, setName] = useState("");
-   const [imageUrl, setImageUrl] = useState("");
+   const [imageUrl, setImageUrl] = useState("https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png");
    
    useLayoutEffect(() => {
-     setImageUrl("https://www.seekpng.com/png/detail/110-1100707_person-avatar-placeholder.png");
      navigation.setOptions({
          headerBackVisible: false,
          headerLeft: () => (
           <TouchableOpacity style={{flexDirection: "row", alignItems: "center",}} onPress={() => navigation.navigate("Login")}>
               <AntDesign style={{marginRight: 10}} name='arrowleft' size={25} color="white" />
-              <Text size={25} style={{color:"white", size:25}}>Back to Login</Text>
+              <Text size={25} style={{color:"white",}}>Back to Login</Text>
           </TouchableOpacity>
       ),
          
